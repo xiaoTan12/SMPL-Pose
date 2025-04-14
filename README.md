@@ -1,7 +1,7 @@
 # SMPL-Pose: Adaptive graph transformer with llm priors for 3D human reconstruction
 
 ## 1. Overview
-SMPL-Pose is a cutting-edge method for monocular 3D human shape and pose estimation. Leveraging the power of transformers, it provides accurate and efficient solutions for 3D human modeling tasks. This repository contains the code, datasets, and instructions for using SMPLer.
+SMPL-Pose is a cutting-edge method for monocular 3D human shape and pose estimation. Leveraging the power of transformers, it provides accurate and efficient solutions for 3D human modeling tasks. This repository contains the code, datasets, and instructions for using SMPL-Pose.
 
 ## 2. Hardware Requirements
 - **Testing**: Most modern GPUs are sufficient to run the testing process.
@@ -10,8 +10,8 @@ SMPL-Pose is a cutting-edge method for monocular 3D human shape and pose estimat
 ## 3. Installation
 ### 3.1 Create Conda Environment
 ```bash
-conda create -n smpler python=3.8
-conda activate smpler
+conda create -n SMPL-Pose python=3.8
+conda activate SMPL-Pose
 ```
 ### 3.2 Install Packages
 ```bash
@@ -29,8 +29,8 @@ rm pytorch3d-0.5.0-py38_cu111_pyt180.tar.bz2
 
 ## 4. How to Run
 ### 4.1 Prepare Data
-- Download the meta data and extract it into `PATH_to_SMPLer/meta_data`.
-- Download the pretrained models and extract it into `PATH_to_SMPLer/pretrained`.
+- Download the meta data and extract it into `PATH_to_SMPL-Pose/meta_data`.
+- Download the pretrained models and extract it into `PATH_to_SMPL-Pose/pretrained`.
 
 ### 4.2 Run Demo
 ```bash
@@ -44,65 +44,65 @@ There are two ways to download the datasets:
     1. Download `azcopy` from [here](Please replace with the actual download link).
     2. Navigate to the directory where you want to store the dataset: `cd PATH_to_STORE_DATASET`
     3. Set the `azcopy` path: `azcopy_path=PATH_to_AZCOPY`
-    4. Run the download script: `bash PATH_to_SMPLer/scripts/download_datasets_azcopy.sh`
-    5. Create a symbolic link: `cd PATH_to_SMPLer && ln -s PATH_to_STORE_DATASET ./datasets`
+    4. Run the download script: `bash PATH_to_SMPL-Pose/scripts/download_datasets_azcopy.sh`
+    5. Create a symbolic link: `cd PATH_to_SMPL-Pose && ln -s PATH_to_STORE_DATASET ./datasets`
 - **Alternative**: Use `wget` (usually slower and less stable, but no dependency on `azcopy`).
     1. Navigate to the dataset storage directory: `cd PATH_to_STORE_DATASET`
-    2. Run the download script: `bash PATH_to_SMPLer/scripts/download_datasets_wget.sh`
+    2. Run the download script: `bash PATH_to_SMPL-Pose/scripts/download_datasets_wget.sh`
 
 ### 5.2 Test
 - **Test on H36M dataset**
-    - For SMPLer:
+    - For SMPL-Pose:
 ```bash
-python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --eval_only --val_batch_size=128 --model_type=smpler --data_mode=h36m --hrnet_type=w32 --load_checkpoint=pretrained/SMPLer_h36m.pt 
+python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --eval_only --val_batch_size=128 --model_type=SMPL-Pose --data_mode=h36m --hrnet_type=w32 --load_checkpoint=pretrained/SMPL-Pose_h36m.pt 
 ```
-    - For SMPLer-L:
+    - For SMPL-Pose:
 ```bash
-python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --eval_only --val_batch_size=128 --model_type=smpler --data_mode=h36m --hrnet_type=w48 --load_checkpoint=pretrained/SMPLer-L_h36m.pt 
+python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --eval_only --val_batch_size=128 --model_type=SMPL-Pose --data_mode=h36m --hrnet_type=w48 --load_checkpoint=pretrained/SMPL-Pose-L_h36m.pt 
 ```
 - **Test on 3DPW dataset**
-    - For SMPLer:
+    - For SMPL-Pose:
 ```bash
-python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --eval_only --val_batch_size=128 --model_type=smpler --data_mode=3dpw --hrnet_type=w32 --load_checkpoint=pretrained/SMPLer_3dpw.pt 
+python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --eval_only --val_batch_size=128 --model_type=SMPL-Pose --data_mode=3dpw --hrnet_type=w32 --load_checkpoint=pretrained/SMPL-Pose_3dpw.pt 
 ```
-    - For SMPLer-L:
+    - For SMPL-Pose-L:
 ```bash
-python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --eval_only --val_batch_size=128 --model_type=smpler --data_mode=3dpw --hrnet_type=w48 --load_checkpoint=pretrained/SMPLer-L_3dpw.pt 
+python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --eval_only --val_batch_size=128 --model_type=SMPL-Pose --data_mode=3dpw --hrnet_type=w48 --load_checkpoint=pretrained/SMPL-Pose-L_3dpw.pt 
 ```
 
 ### 5.3 Train
-- **For SMPLer**:
+- **For SMPL-Pose**:
     1. **Train CNN backbone on mixed data**:
 ```bash
 python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --exp_name=backbone --batch_size=100 --num_workers=8 --lr=2e-4 --data_mode=h36m --model_type=backbone --num_epochs=50 --hrnet_type=w32  
 ```
-    2. **Train SMPLer on mixed data**:
+    2. **Train SMPL-Pose on mixed data**:
 ```bash
-python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --exp_name=smpler --batch_size=100 --num_workers=8 --lr=2e-4 --data_mode=h36m --model_type=smpler --num_epochs=100 --hrnet_type=w32 --load_checkpoint=logs/backbone/checkpoints/epoch_049.pt
+python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --exp_name=SMPL-Pose --batch_size=100 --num_workers=8 --lr=2e-4 --data_mode=h36m --model_type=SMPL-Pose --num_epochs=100 --hrnet_type=w32 --load_checkpoint=logs/backbone/checkpoints/epoch_049.pt
 ```
-    3. **Finetune SMPLer on 3DPW**:
+    3. **Finetune SMPL-Pose on 3DPW**:
 ```bash
-python -m torch.distributed.launch --nproc_per_node=1 --use_env main.py --exp_name=smpler_3dpw --batch_size=32 --num_workers=8 --lr=1e-4 --data_mode=3dpw --model_type=smpler --num_epochs=2 --hrnet_type=w32 --load_checkpoint=logs/smpler/checkpoints/epoch_***.pt --summary_steps=100
+python -m torch.distributed.launch --nproc_per_node=1 --use_env main.py --exp_name=SMPL-Pose_3dpw --batch_size=32 --num_workers=8 --lr=1e-4 --data_mode=3dpw --model_type=SMPL-Pose --num_epochs=2 --hrnet_type=w32 --load_checkpoint=logs/SMPL-Pose/checkpoints/epoch_***.pt --summary_steps=100
 ```
-- **For SMPLer-L**:
+- **For SMPL-Pose-L**:
     1. **Train CNN backbone on mixed data**:
 ```bash
 python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --exp_name=backbone-L --batch_size=100 --num_workers=8 --lr=2e-4 --data_mode=h36m --model_type=backbone --num_epochs=50 --hrnet_type=w48  
 ```
-    2. **Train SMPLer-L on mixed data**:
+    2. **Train SMPL-Pose-L on mixed data**:
 ```bash
-python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --exp_name=smpler-L --batch_size=100 --num_workers=8 --lr=2e-4 --data_mode=h36m --model_type=smpler --num_epochs=100 --hrnet_type=w48 --load_checkpoint=logs/backbone-L/checkpoints/epoch_049.pt
+python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --exp_name=SMPL-Pose-L --batch_size=100 --num_workers=8 --lr=2e-4 --data_mode=h36m --model_type=SMPL-Pose --num_epochs=100 --hrnet_type=w48 --load_checkpoint=logs/backbone-L/checkpoints/epoch_049.pt
 ```
-    3. **Finetune SMPLer-L on 3DPW**:
+    3. **Finetune SMPL-Pose-L on 3DPW**:
 ```bash
-python -m torch.distributed.launch --nproc_per_node=1 --use_env main.py --exp_name=smpler-L_3dpw --batch_size=32 --num_workers=8 --lr=1e-4 --data_mode=3dpw --model_type=smpler --num_epochs=2 --hrnet_type=w48 --load_checkpoint=logs/smpler-L/checkpoints/epoch_***.pt --summary_steps=100
+python -m torch.distributed.launch --nproc_per_node=1 --use_env main.py --exp_name=SMPL-Pose-L_3dpw --batch_size=32 --num_workers=8 --lr=1e-4 --data_mode=3dpw --model_type=SMPL-Pose --num_epochs=2 --hrnet_type=w48 --load_checkpoint=logs/SMPL-Pose-L/checkpoints/epoch_***.pt --summary_steps=100
 ```
 
 ## 6. Cite
-If you use SMPLer in your work, please cite the following paper:
+If you use SMPL-Pose in your work, please cite the following paper:
 ```bibtex
-@article{xu2024smpler,
-  title={SMPLer: Taming Transformers for Monocular 3D Human Shape and Pose Estimation},
+@article{xu2024SMPL-Pose,
+  title={SMPL-Pose: Taming Transformers for Monocular 3D Human Shape and Pose Estimation},
   author={Xu, Xiangyu and Liu, Lijuan and Yan, Shuicheng},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
   year={2024}
