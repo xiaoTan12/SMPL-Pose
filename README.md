@@ -1,8 +1,8 @@
-![1_low_res](https://github.com/user-attachments/assets/3a1efa45-b489-494a-93f9-af1517b49563)# SMPL-Pose: Adaptive graph transformer with llm priors for 3D human reconstruction
+ SMPL-Pose: Adaptive graph transformer with llm priors for 3D human reconstruction
 
 ## 1. Overview
 SMPL-Pose is a cutting-edge method for monocular 3D human shape and pose estimation. Leveraging the power of transformers, it provides accurate and efficient solutions for 3D human modeling tasks. This repository contains the code, datasets, and instructions for using SMPL-Pose.
-
+![1_low_res](https://github.com/user-attachments/assets/3a1efa45-b489-494a-93f9-af1517b49563)#
 ## 2. Hardware Requirements
 - **Testing**: Most modern GPUs are sufficient to run the testing process.
 - **Training**: For optimal training performance, it is highly recommended to use 2 NVIDIA A100 GPUs.
