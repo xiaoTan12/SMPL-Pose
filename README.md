@@ -5,7 +5,6 @@ SMPL-Pose is a cutting-edge method for monocular 3D human shape and pose estimat
 ![1_low_res](https://github.com/user-attachments/assets/3a1efa45-b489-494a-93f9-af1517b49563)#
 ## 2. Hardware Requirements
 - **Testing**: Most modern GPUs are sufficient to run the testing process.
-- **Training**: For optimal training performance, it is highly recommended to use 2 NVIDIA A100 GPUs.
 
 ## 3. Installation
 ### 3.1 Create Conda Environment
