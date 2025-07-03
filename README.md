@@ -97,23 +97,9 @@ python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --exp_na
 ```bash
 python -m torch.distributed.launch --nproc_per_node=1 --use_env main.py --exp_name=SMPL-Pose-L_3dpw --batch_size=32 --num_workers=8 --lr=1e-4 --data_mode=3dpw --model_type=SMPL-Pose --num_epochs=2 --hrnet_type=w48 --load_checkpoint=logs/SMPL-Pose-L/checkpoints/epoch_***.pt --summary_steps=100
 ```
-
-## 6. Cite
-If you use SMPL-Pose in your work, please cite the following paper:
-```bibtex
-@article{xu2024SMPL-Pose,
-  title={SMPL-Pose: Taming Transformers for Monocular 3D Human Shape and Pose Estimation},
-  author={Xu, Xiangyu and Liu, Lijuan and Yan, Shuicheng},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2024}
-}
 ```
 
 ## 7. Related Resources
 Explore these related resources to deepen your understanding of 3D human modeling:
-- METRO
-- Mesh Graphormer
-- RSC-Net
-- Texformer
-- Sewformer
-- GP-NeRF
+- METRO(https://github.com/isarandi/metro‑pose3d)
+- GP-NeRF(https://github.com/zyqz97/GP‑NeRF)
